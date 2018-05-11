@@ -1,0 +1,36 @@
+<?php
+
+
+/**
+ * @file
+ * Checks if a user e-mail entered on a webform field exists on your database.
+ */
+function webform_usermail_validation_webform_validation_validators() {
+    return array(
+    'usermail' => array(
+        'name' => t('Must match a user e-mail'),
+  	'description' => t('Validates that user-entered data matches a user e-mail.'),
+  	'component_types' => array(
+  	    'email',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_webform_validation_validate().
+ */
+function webform_usermail_validation_webform_validation_validate($validator_name, $items, $components, $rule) {
+    if ($items) {
+        $errors = array();
+        switch ($validator_name) {
+            case 'usermail':
+            foreach ($items as $key => $val) {
+            	if ($val) {
+                    $errors[$key] = t('The %item field does not match an active e-mail.', array('%item' => $components[$key]['name']));
+    	    	}
+    	    }
+    	    return $errors;
+    	}
+    }
+}

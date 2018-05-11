@@ -1,0 +1,5 @@
+name = Webform Usermail Validation
+description = Checks if a user e-mail entered on a webform field exists on your database.
+package = Webform Validation
+dependencies[] = webform_validation
+core = 7.x
